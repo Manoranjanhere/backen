@@ -12,9 +12,17 @@ import { fileURLToPath } from "url";
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+app.use(cors({
+  origin: ['https://fronten-sigma.vercel.app/register'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Specify the allowed methods
+  allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
+}));
+
 app.use(cors({ credentials: true, origin: true }));
 dotenv.config({ path: "./config/config.env" });
 
+app.use(express.static(path.join(__dirname, "../client/build")));
 
 
 app.use(express.json());
@@ -24,6 +32,11 @@ app.use("/api/v1/login", loginRouter);
 app.use("/api/v1/register", registerRouter);
 app.use("/api/v1/contact", contactRoute);
 
+
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/build/index.html'));
+});
 
 
 dbConnection();
