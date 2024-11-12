@@ -22,7 +22,6 @@ app.use(cors({
 app.use(cors({ credentials: true, origin: true }));
 dotenv.config({ path: "./config/config.env" });
 
-app.use(express.static(path.join(__dirname, "../client/build")));
 
 
 app.use(express.json());
@@ -32,11 +31,6 @@ app.use("/api/v1/login", loginRouter);
 app.use("/api/v1/register", registerRouter);
 app.use("/api/v1/contact", contactRoute);
 
-
-
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/build/index.html'));
-});
 
 
 dbConnection();
