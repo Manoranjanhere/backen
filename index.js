@@ -14,13 +14,11 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 app.use(cors({
-  origin: ['https://fronten-sigma.vercel.app/register'],
-  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Specify the allowed methods
-  allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
+  origin: 'https://fronten-sigma.vercel.app/',  // Set this to your frontend URL
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,  // Allow cookies or credentials if needed
 }));
-
-app.use(cors({ credentials: true, origin: true }));
-dotenv.config({ path: "./config/config.env" });
 
 
 
